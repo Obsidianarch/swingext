@@ -2,6 +2,8 @@ package com.github.obsidianarch.swingext;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -21,7 +23,7 @@ import javax.swing.KeyStroke;
  * 
  * @author Austin
  */
-public class SimpleFrame extends JFrame implements ActionListener {
+public class SimpleFrame extends JFrame implements ActionListener, WindowListener {
     
     //
     // Fields
@@ -51,21 +53,10 @@ public class SimpleFrame extends JFrame implements ActionListener {
     public SimpleFrame( Class< ? > partial ) throws IllegalArgumentException {
         if ( partial == null ) throw new IllegalArgumentException( "partial class cannot be null!" );
         partialClass = partial;
+
+        addWindowListener( this );
     }
     
-    /**
-     * Constructs a new SimpleFrame with the given object for action methods.
-     * 
-     * @param o
-     *            The object which contains all action code.
-     * @throws IllegalArgumentException
-     *             If {@code o} was null.
-     */
-    public SimpleFrame( Object o ) throws IllegalArgumentException {
-        if ( o == null ) throw new IllegalArgumentException( "partial class object cannot be null!" );
-        partialClass = o.getClass();
-    }
-
     //
     // Actions
     //
@@ -274,6 +265,38 @@ public class SimpleFrame extends JFrame implements ActionListener {
             ex.printStackTrace();
         }
 
+    }
+
+    //
+    // Useful Overrides (only if extensor uses them)
+    //
+    
+    @Override
+    public void windowOpened( WindowEvent e ) {
+    }
+    
+    @Override
+    public void windowClosing( WindowEvent e ) {
+    }
+    
+    @Override
+    public void windowClosed( WindowEvent e ) {
+    }
+    
+    @Override
+    public void windowIconified( WindowEvent e ) {
+    }
+    
+    @Override
+    public void windowDeiconified( WindowEvent e ) {
+    }
+    
+    @Override
+    public void windowActivated( WindowEvent e ) {
+    }
+    
+    @Override
+    public void windowDeactivated( WindowEvent e ) {
     }
 
 }
